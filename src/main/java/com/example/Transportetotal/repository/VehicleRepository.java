@@ -3,36 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.Repositorio;
+package com.example.Transportetotal.repository;
 
-import com.example.model.Vehiculo;
+import com.example.Transportetotal.model.Vehicle;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author yeral
  */
 
-@Repository
 ////crear, leer, aliminar de la tabla Vehiculo
-public interface VehiculoRepository extends CrudRepository<Vehiculo, Long>{
+public interface VehicleRepository extends CrudRepository<Vehicle, Long>{
 
     @Override
-    public void deleteById(Long id);
+    void deleteById(Long id);
 
     @Override
-    public long count();
+    long count();
 
     @Override
-    public List<Vehiculo> findAll();
+    List<Vehicle> findAll();
 
     @Override
-    public Optional<Vehiculo> findById(Long id);
+    Optional<Vehicle> findById(Long id);
 
     @Override
-    public <V extends Vehiculo> V save(V entity);
+    <V extends Vehicle> V save(V entity);
     
 }

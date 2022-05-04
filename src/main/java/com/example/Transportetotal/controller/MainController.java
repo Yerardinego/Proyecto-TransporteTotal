@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.controller;
+package com.example.Transportetotal.controller;
 
 /**
  *
  * @author yeral
  */
-import com.example.Repositorio.VehiculoRepository;
-import com.example.model.Vehiculo;
+import com.example.Transportetotal.repository.VehicleRepository;
+import com.example.Transportetotal.model.Vehicle;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/demo") // This means URL's start with /demo (after Application path)
@@ -30,21 +29,21 @@ public class MainController {
 
     @Autowired //traer el repo
 
-    VehiculoRepository vehiculorepository; //crear una Variable de tipo Vehiculorepository
+    VehicleRepository vehiculorepository; //crear una Variable de tipo Vehiculorepository
 
     @GetMapping("/Vehiculo")
-    public List<Vehiculo> findAll() {
+    public List<Vehicle> findAll() {
         return vehiculorepository.findAll();
 
     }
 
     @GetMapping("/servicios/{id}")
-    public Optional<Vehiculo> findById(@PathVariable Long id) {
+    public Optional<Vehicle> findById(@PathVariable Long id) {
         return vehiculorepository.findById(id);
     }
 
     @PostMapping("/servicios")
-    public String savePost(@RequestBody Vehiculo vehiculo) {
+    public String savePost(@RequestBody Vehicle vehiculo) {
         vehiculorepository.save(vehiculo);
         return "ok";
     }
