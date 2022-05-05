@@ -1,4 +1,4 @@
-package com.example.Transportetotal.services.reports;
+package com.example.Transportetotal.services.reports.vehicletrips;
 
 import com.example.Transportetotal.model.*;
 import com.example.Transportetotal.repository.ExpensesByVehicleRepository;
@@ -21,6 +21,25 @@ public class DisplayVehicleTrips implements VehicleTripViewer {
         return repository
                 .findAll()
                 .stream()
+                .map(this::toView)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TripByVehicleView> display(String plate) {
+        return repository
+                .findTripsByVehiclePlate(plate)
+                .stream()
+                .map(this::toView)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TripByVehicleView> display(Long vehicleId) {
+        return repository
+                .findAll()
+                .stream()
+                .filter(tripsByVehicle -> tripsByVehicle.getId().getVehicleId().equals(vehicleId))
                 .map(this::toView)
                 .collect(Collectors.toList());
     }

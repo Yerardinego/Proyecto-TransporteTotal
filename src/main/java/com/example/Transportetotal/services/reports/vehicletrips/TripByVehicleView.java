@@ -1,4 +1,4 @@
-package com.example.Transportetotal.services.reports;
+package com.example.Transportetotal.services.reports.vehicletrips;
 
 import lombok.Value;
 

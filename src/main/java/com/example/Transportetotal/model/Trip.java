@@ -36,6 +36,7 @@ public class Trip {
     private Double price;
 
     @OneToMany(mappedBy = "trip")
+    @ToString.Exclude
     private Set<TripsByVehicle> tripsByVehicles;
   }
     

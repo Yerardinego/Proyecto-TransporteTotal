@@ -30,6 +30,13 @@ public class ExpensesByVehicle {
 
     private Double cost;
 
+    public ExpensesByVehicle(ExpensesByVehicleId id, Expense expense, Vehicle vehicle, Double cost) {
+        this.id = id;
+        this.expense = expense;
+        this.vehicle = vehicle;
+        this.cost = cost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,6 +33,12 @@ public class Vehicle {
     private String type;
     private String model;
 
+    public Vehicle(String plate, String type, String model) {
+        this.plate = plate;
+        this.type = type;
+        this.model = model;
+    }
+
     @OneToMany(mappedBy = "vehicle")
     @ToString.Exclude
     private Set<TripsByVehicle> tripsByVehicles;

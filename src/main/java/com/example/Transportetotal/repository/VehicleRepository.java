@@ -8,7 +8,8 @@ package com.example.Transportetotal.repository;
 import com.example.Transportetotal.model.Vehicle;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
@@ -16,7 +17,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 ////crear, leer, aliminar de la tabla Vehiculo
-public interface VehicleRepository extends CrudRepository<Vehicle, Long>{
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Override
     void deleteById(Long id);
@@ -32,5 +33,8 @@ public interface VehicleRepository extends CrudRepository<Vehicle, Long>{
 
     @Override
     <V extends Vehicle> V save(V entity);
-    
+
+    Optional<Vehicle> findByPlate(String plate);
+
+    boolean existsByPlate(String plate);
 }

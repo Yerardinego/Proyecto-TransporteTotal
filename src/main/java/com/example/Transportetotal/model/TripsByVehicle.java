@@ -32,6 +32,7 @@ public class TripsByVehicle {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
+
     @ManyToOne
     @MapsId("tripId")
     @JoinColumn(name = "trip_id")
