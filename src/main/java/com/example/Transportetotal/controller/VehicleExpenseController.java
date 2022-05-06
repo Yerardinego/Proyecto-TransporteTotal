@@ -4,6 +4,7 @@ import com.example.Transportetotal.services.reports.vehicleexpenses.VehicleExpen
 import com.example.Transportetotal.services.reports.vehicleexpenses.VehicleExpensesViewer;
 import com.example.Transportetotal.services.vehicleexpenses.VehicleExpenseCreator;
 import com.example.Transportetotal.services.vehicleexpenses.VehicleExpenseRequest;
+import com.example.Transportetotal.services.vehicleexpenses.VehicleExpensesHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,23 @@ import java.util.Optional;
 public class VehicleExpenseController {
     private final VehicleExpenseCreator vehicleExpenseCreator;
     private final VehicleExpensesViewer vehicleExpensesViewer;
+    private final VehicleExpensesHandler handler;
 
     @PostMapping
-    public String saveVehicleExpense(@RequestBody VehicleExpenseRequest request) {
-        return vehicleExpenseCreator.create(request);
+    public ResponseEntity<String> saveVehicleExpense(@RequestBody VehicleExpenseRequest request) {
+        return ResponseEntity.ok(vehicleExpenseCreator.create(request));
+    }
+
+    @DeleteMapping("/{vehicleId}/{expenseId}")
+    public ResponseEntity<String> delete(@PathVariable Long vehicleId, @PathVariable Long expenseId) {
+        return ResponseEntity.ok(handler.delete(vehicleId, expenseId));
     }
 
     @PutMapping("{id}")
-    public String updateVehicleExpense(@RequestBody VehicleExpenseRequest request, @PathVariable Long id) {
-        return vehicleExpenseCreator.update(request, id);
+    public ResponseEntity<String> updateVehicleExpense(
+            @RequestBody VehicleExpenseRequest request,
+            @PathVariable Long id) {
+        return ResponseEntity.ok(vehicleExpenseCreator.update(request, id));
     }
 
     @GetMapping
@@ -39,8 +48,8 @@ public class VehicleExpenseController {
     @GetMapping("{id}")
     public ResponseEntity<List<VehicleExpensesView>> findById(@PathVariable Long id) {
         var vehicleExpensesViews = vehicleExpensesViewer.display(id);
-                return vehicleExpensesViews.isEmpty()
-                        ? ResponseEntity.notFound().build()
-                        : ResponseEntity.ok(vehicleExpensesViews);
+        return vehicleExpensesViews.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(vehicleExpensesViews);
     }
 }
